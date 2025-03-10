@@ -1,0 +1,36 @@
+services:
+  backstage-postgres:
+    image: postgres:latest
+    container_name: backstage-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backstage:
+    container_name: backstage-app
+    build:
+      context: ./backstage-app
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_HOST: backstage-postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PORT: 5432
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      GITHUB_USERNAME: ${GITHUB_USERNAME}
+
+    ports:
+      - '7007:7007'
+      - '7008:7008'
+    restart: unless-stopped
+    depends_on:
+      - backstage-postgres
+
+volumes:
+  postgres_data:
