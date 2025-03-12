@@ -44,10 +44,4 @@
    sh deploy.sh
    ```
 
-2. 🔄 Forward the port to access the Backstage service:
-
-   ```sh
-   sudo kubectl port-forward --namespace=backstage svc/backstage 80:80
-   ```
-
-3. 🌐 Open your browser and go to [http://127.0.0.1:80](http://127.0.0.1:80).
+2. 🌐 Open your browser and go to the testing URL provided by the Kubernetes service.
