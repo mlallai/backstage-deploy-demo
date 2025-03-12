@@ -119,3 +119,7 @@ kubectl describe pods -n backstage | grep -A 3 "Resources:"
 print_step "Deployment completed successfully! 🚀"
 echo -e "\n${GREEN}Current deployments:${NC}"
 kubectl get pods -n backstage
+
+# Get the testing URL
+print_step "Getting the testing URL for Backstage..."
+minikube service backstage -n backstage --url
