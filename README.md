@@ -11,18 +11,18 @@
 1. 📄 Copy the example environment file:
 
    ```sh
-   cp .env.example .env
+   cp backstage-app/.env.example backstage-app/.env
    ```
 
    Optionally, if not using Docker:
 
    ```sh
-   cp .env.yarn.example .env.yarn
+   cp backstage-app/.env.yarn.example backstage-app/.env.yarn
    ```
 
-2. 🔑 Create a GitHub OAuth App. Follow [this link](https://github.com/settings/applications/new) to create the app. Retrieve the `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, and `GITHUB_USERNAME` from GitHub and paste the values into the `.env` and `.env.yarn` files.
+2. 🔑 Create a GitHub OAuth App. Follow [this link](https://github.com/settings/applications/new) to create the app. Retrieve the `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, and `GITHUB_USERNAME` from GitHub and paste the values into the `backstage-app/.env` and `backstage-app/.env.yarn` files.
 
-3. 📂 Navigate to the `backstage-app` directory and run:
+3. 📂 Navigate to the `backstage-app` directory and run docker-compose file:
    ```sh
    cd backstage-app
    docker-compose up --build -d
