@@ -2,9 +2,11 @@ services:
   backstage-postgres:
     image: postgres:latest
     container_name: backstage-postgres
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: postgres
     ports:
       - '5432:5432'
@@ -12,8 +14,10 @@ services:
       - postgres_data:/var/lib/postgresql/data
   backstage-app:
     container_name: backstage-app
+    env_file:
+      - .env
     build:
-      context: ./backstage-app
+      context: .
       dockerfile: Dockerfile
     environment:
       POSTGRES_HOST: backstage-postgres
@@ -27,7 +31,6 @@ services:
 
     ports:
       - '7007:7007'
-      - '7008:7008'
     restart: unless-stopped
     depends_on:
       - backstage-postgres
