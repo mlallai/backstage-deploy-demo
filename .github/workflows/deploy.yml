@@ -40,10 +40,10 @@ jobs:
           docker build -t $IMAGE_URI ./backstage-app
           docker push $IMAGE_URI
 
-      # - name: Deploy to AWS ECS
-      #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      #   with:
-      #     task-definition: ecs-task-def.json
-      #     service: my-ecs-service
-      #     cluster: my-ecs-cluster
-      #     wait-for-service-stability: true
+      - name: Deploy to AWS ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ secrets.AWS_BACKSTAGE_TASK }}.json
+          service: ${{ secrets.AWS_BACKSTAGE_SERVICE }}
+          cluster: ${{ secrets.AWS_BACKSTAGE_CLUSTER }}
+          wait-for-service-stability: true
