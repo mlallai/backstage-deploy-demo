@@ -1,5 +1,5 @@
 app:
-  title: Matthieu Lallaï Backstage Demo App
+  title: Matthieu Lallaï Backstage Demo Application
   baseUrl: http://localhost:7007
 
 organization:
