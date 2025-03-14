@@ -78,6 +78,14 @@ auth:
             # Matches the GitHub username with the Backstage user entity name.
             # See https://backstage.io/docs/auth/github/provider#resolvers for more resolvers.
             - resolver: usernameMatchingUserEntityName
+      production:
+        clientId: ${GITHUB_CLIENT_ID}
+        clientSecret: ${GITHUB_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            # Matches the GitHub username with the Backstage user entity name.
+            # See https://backstage.io/docs/auth/github/provider#resolvers for more resolvers.
+            - resolver: usernameMatchingUserEntityName
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
