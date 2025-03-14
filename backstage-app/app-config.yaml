@@ -1,6 +1,6 @@
 app:
   title: Matthieu Lallaï Backstage Demo Application
-  baseUrl: http://backstage-lb-1347011482.eu-west-3.elb.amazonaws.com
+  baseUrl: http://localhost:7007
 
 organization:
   name: Matthieu Lallaï
@@ -12,20 +12,15 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  baseUrl: http://backstage-lb-1347011482.eu-west-3.elb.amazonaws.com
+  baseUrl: http://localhost:7007
   listen:
-    port: 7000
+    port: 7007
     # Uncomment the following host directive to bind to specific interfaces
     # host: 127.0.0.1
   csp:
-    upgrade-insecure-requests: false # For tutorial purposes only
+    upgrade-insecure-requests: false
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
-  # cors:
-  #   origin: ['*']
-  #   methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
-  #   credentials: true
-  # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
   database:
     # client: better-sqlite3
