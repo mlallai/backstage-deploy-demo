@@ -41,10 +41,23 @@ jobs:
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
 
-      # - name: Deploy to AWS ECS
-      #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      #   with:
-      #     task-definition: ${{ secrets.AWS_BACKSTAGE_TASK }}.json
-      #     service: ${{ secrets.AWS_BACKSTAGE_SERVICE }}
-      #     cluster: ${{ secrets.AWS_BACKSTAGE_CLUSTER }}
-      #     wait-for-service-stability: true
+      - name: Force ECS service redeployment
+        run: |
+          aws ecs update-service \
+            --cluster ${{ AWS_BACKSTAGE_CLUSTER }} \
+            --service ${{ AWS_BACKSTAGE_SERVICE }} \
+            --force-new-deployment
+          
+      - name: Wait for service to stabilize
+        run: |
+          aws ecs wait services-stable \
+            --cluster ${{ AWS_BACKSTAGE_CLUSTER }} \
+            --services ${{ AWS_BACKSTAGE_SERVICE }}
+          
+      - name: Get deployment status
+        run: |
+          echo "Deployment complete. Service details:"
+          aws ecs describe-services \
+            --cluster ${{ AWS_BACKSTAGE_CLUSTER }} \
+            --services ${{ AWS_BACKSTAGE_SERVICE }} \
+            --query 'services[0].{Status:status,RunningCount:runningCount,DesiredCount:desiredCount,PendingCount:pendingCount,DeploymentStatus:deployments[0].status}'
